@@ -100,7 +100,11 @@ jobs:
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
-      env: 
-        CODEQL_ACTION_EXTRA_OPTIONS: '{"database":{"interpret-results":["--max-paths", 1]}}'
       with:
         category: "/language:${{matrix.language}}"
+
+    - name: Upload CodeQL Analysis
+      uses: actions/upload-artifact@v3
+      with:
+        name: cpp.sarif
+        path: ${{runner.workspace}}/results/cpp.sarif
